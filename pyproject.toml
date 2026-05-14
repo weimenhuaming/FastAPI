@@ -1,0 +1,16 @@
+[project]
+name = "fastapi-test"
+version = "0.1.0"
+description = "测试搭建fastapi"
+authors = [
+    {name = "cxy", email = "492730753@qq.com"}
+]
+requires-python = ">=3.12,<3.13"  # 改为这样，允许所有 3.12.x 版本
+dependencies = [
+    "fastapi (>=0.136.1,<0.137.0)",
+    "uvicorn (>=0.46.0,<0.47.0)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
