@@ -1,0 +1,3 @@
+# 不创建项目内 .venv；依赖装进 `poetry env use` 指定的 Python（如 conda agent）
+[virtualenvs]
+create = false
