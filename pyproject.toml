@@ -9,7 +9,8 @@ requires-python = ">=3.12,<3.13"  # 改为这样，允许所有 3.12.x 版本
 dependencies = [
     "fastapi (>=0.136.1,<0.137.0)",
     "uvicorn (>=0.46.0,<0.47.0)",
-    "zai-sdk (>=0.2.2,<0.3.0)"
+    "zai-sdk (>=0.2.2,<0.3.0)",
+    "chromadb (>=1.5.9,<2.0.0)"
 ]
 
 [build-system]

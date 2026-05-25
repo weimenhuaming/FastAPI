@@ -1,4 +1,5 @@
 # app/services/chat_service.py
-def chat(user_id: str, question: str):
-    
-    return "成功"
+from app.agent.llm.zhipu import zhipu
+async def chat(user_id: str, question: str):
+    res = zhipu(question)
+    return res

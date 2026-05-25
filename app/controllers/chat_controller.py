@@ -14,6 +14,6 @@ class ChatResponse(BaseModel):
     message: str
 
 @router.post("/chat", response_model=ChatResponse)
-def chat_endpoint(req: ChatRequest):
+async def chat_endpoint(req: ChatRequest):
     res = chat(req.user_id, req.question)
-    return ChatResponse(message=res, code=200)
+    return ChatResponse(code=200,message=res)
