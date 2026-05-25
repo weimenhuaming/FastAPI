@@ -1,27 +1,25 @@
 from zai import ZhipuAiClient
 
-# Initialize client
-client = ZhipuAiClient(api_key="aec6ba32d6464b329efd63cff837feb3.W0eFMQFiJD0S25ge")
+from app.config import get_settings
 
-# Create chat completion
-def zhipu(question: str) -> str:  # 或者使用具体的响应类型
-    """
-    调用智谱AI接口
-    
-    Args:
-        question: 用户问题
-        
-    Returns:
-        包含 choices 的响应对象
-    """
-    response = client.chat.completions.create(
-        model="glm-4-plus",
-        messages=[
-            {
-                "role": "user", 
-                "content": question
-            }
-        ]
+_client: ZhipuAiClient | None = None
+
+
+def _get_client() -> ZhipuAiClient:
+    global _client
+    if _client is None:
+        settings = get_settings()
+        if not settings.zhipu_api_key:
+            raise ValueError("请在 .env 中配置 ZHIPU_API_KEY")
+        _client = ZhipuAiClient(api_key=settings.zhipu_api_key)
+    return _client
+
+
+def zhipu(question: str) -> str:
+    """直接调用智谱大模型（不经过知识库）。"""
+    settings = get_settings()
+    response = _get_client().chat.completions.create(
+        model=settings.zhipu_model,
+        messages=[{"role": "user", "content": question}],
     )
     return response.choices[0].message.content
-
